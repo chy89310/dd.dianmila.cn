@@ -17,6 +17,11 @@ if(version_compare(PHP_VERSION,'5.3.0','<'))  die('require PHP > 5.3.0 !');
 // 开启调试模式 建议开发阶段开启 部署阶段注释或者设为false
 define('APP_DEBUG',True);
 
+// 设置绑定模块，可以在访问入口程序时默认访问该模块
+// 通过绑定一个新的模块可以自动生成该模块的目录结构
+// define("BIND_MODULE", "Proxy");
+// define("BIND_MODULE", "Account");
+
 // 定义应用目录
 define('APP_PATH','./Application/');
 
