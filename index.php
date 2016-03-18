@@ -21,6 +21,7 @@ define('APP_DEBUG',True);
 // 通过绑定一个新的模块可以自动生成该模块的目录结构
 // define("BIND_MODULE", "Proxy");
 // define("BIND_MODULE", "Account");
+// define("BIND_MODULE", "Task");
 
 // 定义应用目录
 define('APP_PATH','./Application/');

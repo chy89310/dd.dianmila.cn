@@ -1,12 +1,11 @@
 <?php 
 namespace Proxy\Model;
-use Think\Model;
-
+use Think\Model\MongoModel;
 
 /**
 * 
 */
-class ProxyModel extends Model
+class ProxyModel extends MongoModel
 {
 	protected $tableName = "Proxy";
 	protected $trueTableName = "Proxy";
