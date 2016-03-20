@@ -4,9 +4,10 @@ use Think\Controller;
 
 class IndexController extends Controller {
     public function index(){
-    	// $this->display();
+    	$this->display();
     	$Model =  D("Proxy");
     	$Model->create();
-    	var_dump($Model->count());
+    	$p = 1;
+    	dump($Model->getRecordsofPage($p));
     }
 }
