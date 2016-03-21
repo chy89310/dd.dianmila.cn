@@ -1,0 +1,33 @@
+<include file="./Application/Common/View/header.html" title="任务"/>
+
+<a class="btn btn-default" href="/Task/index/create" role="button">新增任务</a>
+
+<div class="container-fluid">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>序号</th>
+				<th>名称</th>
+				<th>深度</th>
+				<th>状态</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<volist name="list" id="item" empty="暂时没有数据" >
+				<tr>
+					<td>{$i}</td>
+					<td>{$item.Name}</td>
+					<td>{$item.Pages}</td>
+					<td>{$item.TaskStatusEnum}</td>
+					<td></td>
+				</tr>
+			</volist>
+		</tbody>
+	</table>
+	<ul class="pager">
+		{$pager}
+	</ul>
+</div>
+
+<include file="./Application/Common/View/footer.html"/>

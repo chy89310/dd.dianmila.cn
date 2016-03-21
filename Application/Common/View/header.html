@@ -44,7 +44,7 @@ $navArray = array(
 				<ul class="nav navbar-nav">
 					<?php 
 						foreach ($navArray as $key => $value) {
-							echo "<li ".(([title]==$value)?"class='active'":"")."><a href='$key'>$value</a></li>";
+							echo "<li ".(([title]==$value)?"class='active'":"")."><a href='__APP__/$key'>$value</a></li>";
 						}
 					 ?>
 					<!-- // <li <?php if([title]=="test") echo "class='active'" ?> ><a href="/index.php">主页</a></li>

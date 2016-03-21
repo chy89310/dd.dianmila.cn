@@ -1,0 +1,17 @@
+<include file="./Application/Common/View/header.html" title="任务"/>
+
+<div class="container-fluid">
+	<form action="createTask" method="POST" role="form">
+	<legend>新增任务</legend>
+	<div class="form-group">
+		<label for="">名称</label>
+		<input type="text" class="form-control" id="name" name="name" placeholder="Input field">
+	</div>
+		<label for="">深度</label>
+		<input type="text" class="form-control" id="pages" name="pages" placeholder="Input field">
+	</div>
+	<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+
+<include file="./Application/Common/View/footer.html"/>
