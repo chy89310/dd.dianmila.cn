@@ -20,7 +20,11 @@
 					<td>{$item.Name}</td>
 					<td>{$item.Pages}</td>
 					<td>{$item.TaskStatusEnum}</td>
-					<td></td>
+					<td>
+						<a class="btn btn-default" href="/Task/index/resumeOrPause?taskId={$item._id}" role="button">开始任务</a>
+						<a class="btn btn-default" href="/Keyword/index/index?taskId={$item._id}" role="button">查看关键词</a>
+						<a class="btn btn-default" href="/Task/index/deleteTask?taskId={$item._id}" role="button">删除任务</a>
+					</td>
 				</tr>
 			</volist>
 		</tbody>

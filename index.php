@@ -22,6 +22,8 @@ define('APP_DEBUG',True);
 // define("BIND_MODULE", "Proxy");
 // define("BIND_MODULE", "Account");
 // define("BIND_MODULE", "Task");
+// define("BIND_MODULE", "Keyword");
+// define("BIND_MODULE", "Claw");
 
 // 定义应用目录
 define('APP_PATH','./Application/');
