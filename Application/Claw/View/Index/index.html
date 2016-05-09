@@ -16,11 +16,9 @@
 			<volist name="list" id="item" empty="暂时没有数据" >
 				<tr>
 					<td>{$i}</td>
-					<td>{$item.Data[0].account}</td>
-					<td>
-						<a class="btn btn-default" href="/Keyword/index/deleteKeyword?keywordId={$item._id}" role="button">删除</a>
-					</td>
-					<td></td>
+					<td>{$item.account}</td>
+					<td>{$item.updateTime}</td>
+					<td>{$item.title}</td>
 					<td></td>
 					<td></td>
 				</tr>
