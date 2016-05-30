@@ -1,8 +1,70 @@
 <?php
 namespace Account\Controller;
 use Think\Controller;
+use Think\Page;
+
 class IndexController extends Controller {
     public function index(){
-        $this->show('<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} body{ background: #fff; font-family: "微软雅黑"; color: #333;font-size:24px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.8em; font-size: 36px } a,a:hover{color:blue;}</style><div style="padding: 24px 48px;"> <h1>:)</h1><p>欢迎使用 <b>ThinkPHP</b>！</p><br/>版本 V{$Think.version}</div><script type="text/javascript" src="http://ad.topthink.com/Public/static/client.js"></script><thinkad id="ad_55e75dfae343f5a1"></thinkad><script type="text/javascript" src="http://tajs.qq.com/stats?sId=9347272" charset="UTF-8"></script>','utf-8');
+    	$p = I('get.p',1);
+        $c = 10;
+
+    	$this->assign('list',$this->listAccount($p,$c));
+
+        $pager = new Page(D('Account')->count(),$c);
+        $pager->setConfig('prev','上一页');
+        $pager->setConfig('next','下一页');
+        $this->assign('pager',$pager->show());
+    	$this->display();
+    }
+
+    private function listAccount($page,$count) {
+    	return D('Account')->page($page,$count)->select();
+    }
+
+    private function findAccount($taskId) {
+    	return D('Account')->find($taskId);
+    }
+
+    public function save($userId="") {
+    	if ($userId) {
+    		$user = D('Account')->find($userId);
+    		$this->assign('title',"编辑用户");
+    		$this->assign('username',$user["Name"]);
+    		$this->assign('id',$user["_id"]);
+    	} else {
+    		$this->assign('title',"创建用户");
+    	}
+        $this->display();
+    }
+
+    public function saveAccount() {
+    	$id = I('post.userid');
+    	$name = I('post.name');
+        $password = I('post.password');
+    	if ($id && D('Account')->find($id)) {
+    		$data['Name'] = $name;
+    		$data['Password'] = md5($password);
+    		$request['_id'] = $id;
+    		$account_result = D('Account')->where($request)->save($data);
+    		if (!$account_result) {
+	            //错误页面的默认跳转页面是返回前一页，通常不需要设置
+	            $this->error('编辑失败');
+	        }
+	        //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
+	        $this->success('编辑成功', '/Account/index');
+    	} else {
+    		$account = array(
+    			'Name'=>$name,
+    			'Password'=>md5($password),
+    			'CreateTime'=>time(),
+    			'UpdateTime'=>time());
+    		$account_result = D('Account')->add($account);
+        	if (!$account_result) {
+	            //错误页面的默认跳转页面是返回前一页，通常不需要设置
+	            $this->error('新增失败');
+	        }
+	        //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
+	        $this->success('新增成功', '/Account/index');
+    	}
     }
 }
