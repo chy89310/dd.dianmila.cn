@@ -1,0 +1,17 @@
+<include file="./Application/Common/View/header.html" title="用户"/>
+
+<div class="container-fluid">
+	<form action="saveAccount" method="POST" role="form">
+		<legend>{$title}</legend>
+		<div class="form-group">
+			<label for="">用户名</label>
+			<input type="text" class="form-control" id="name" name="name" placeholder="用户名" value="{$username}">
+			<label for="">密码</label>
+			<input type="text" class="form-control" id="password" name="password" placeholder="密码">
+			<input type="hidden" class="form-control" id="userid" name="userid" value="{$id}">
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+</div>
+
+<include file="./Application/Common/View/footer.html"/>

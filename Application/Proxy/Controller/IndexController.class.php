@@ -14,11 +14,6 @@ class IndexController extends Controller {
         $pager->setConfig('next','下一页');
         $this->assign('pager',$pager->show());
     	$this->display();
-    	// $Model =  D("Proxy");
-    	// $Model->create();
-    	// // dump($Model->select());
-    	// $p = 1;
-    	// dump($Model->getRecordsofPage($p));
     }
 
     private function listTask($page,$count) {

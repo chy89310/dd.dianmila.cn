@@ -1,0 +1,35 @@
+<include file="./Application/Common/View/header.html" title="用户"/>
+
+<a class="btn btn-default" href="/Account/index/save" role="button">创建用户</a>
+
+<div class="container-fluid">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>序号</th>
+				<th>用户名</th>
+				<th>用户组</th>
+				<th>最近登陆</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<volist name="list" id="item" empty="暂时没有数据" >
+				<tr>
+					<td>{$i}</td>
+					<td>{$item.Name}</td>
+					<td></td>
+					<td></td>
+					<td>
+						<a class="btn btn-default" href="/Account/index/save?userId={$item._id}" role="button">编辑用户</a>
+					</td>
+				</tr>
+			</volist>
+		</tbody>
+	</table>
+	<ul class="pager">
+		{$pager}
+	</ul>
+</div>
+
+<include file="./Application/Common/View/footer.html"/>
