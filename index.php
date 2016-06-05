@@ -24,6 +24,7 @@ define('APP_DEBUG',True);
 // define("BIND_MODULE", "Task");
 // define("BIND_MODULE", "Keyword");
 // define("BIND_MODULE", "Claw");
+// define("BIND_MODULE", "Link");
 
 // 定义应用目录
 define('APP_PATH','./Application/');
