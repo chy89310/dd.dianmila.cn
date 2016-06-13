@@ -64,12 +64,22 @@ class IndexController extends Controller {
         if (!$connect) {
             $this->error("socket链接失败: ".socket_strerror(socket_last_error($socket))."\n");
         }
-        $request = json_encode(array(
+        $condition["_id"] = I('get.taskId');
+        $task = D('Task')->where($condition)->select();
+        if ($task["TaskStatusEnum"] == 1) {
+            $request = json_encode(array(
             'Id'=>I('get.taskId'),
             "TCPCommandEnum"=>"7"));
-        socket_write($socket, $request, strlen($request));
-        socket_close($socket);
-        $this->success('发送成功', '/Task/index');
+        } else if ($task["TaskStatusEnum"] == 0 || $task["TaskStatusEnum"] == 2 || $task["TaskStatusEnum"] == 3) {
+            $request = json_encode(array(
+            'Id'=>I('get.taskId'),
+            "TCPCommandEnum"=>"8"));
+        }
+        if ($request) {
+            socket_write($socket, $request, strlen($request));
+            socket_close($socket);
+            $this->success('发送成功', '/Task/index');
+        }
     }
 
     public function deleteTask() {
