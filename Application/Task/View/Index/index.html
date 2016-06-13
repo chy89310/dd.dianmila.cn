@@ -20,7 +20,7 @@
 					<td>{$item.Name}</td>
 					<td>{$item.Pages}</td>
 					<td>
-						<?php switch ($item.TaskStatusEnum) {
+						<?php switch ($item['TaskStatusEnum']) {
 							case '-1':
 								echo "错误";
 								break;
@@ -41,13 +41,13 @@
 					<td>
 						<a class="btn btn-default" href="/Claw/index/index?taskId={$item._id}" role="button">文章列表</a>
 						<a class="btn btn-default" href="/Keyword/index/index?taskId={$item._id}" role="button">关键词列表</a>
-						<?php if ($item.TaskStatusEnum == 0 || $item.TaskStatusEnum == 2): ?>
+						<?php if ($item['TaskStatusEnum'] == 0 || $item['TaskStatusEnum'] == 2): ?>
 							<a class="btn btn-default" href="/Task/index/resumeOrPause?taskId={$item._id}" role="button">开始任务</a>
 						<?php endif ?>
-						<?php if ($item.TaskStatusEnum == 1): ?>
+						<?php if ($item['TaskStatusEnum'] == 1): ?>
 							<a class="btn btn-default" href="/Task/index/resumeOrPause?taskId={$item._id}" role="button">暂停任务</a>
 						<?php endif ?>
-						<?php if ($item.TaskStatusEnum == 3): ?>
+						<?php if ($item['TaskStatusEnum'] == 3): ?>
 							<a class="btn btn-default" href="/Task/index/resumeOrPause?taskId={$item._id}" role="button">继续任务</a>
 						<?php endif ?>
 						<a class="btn btn-default" href="/Task/index/deleteTask?taskId={$item._id}" role="button">删除任务</a>
