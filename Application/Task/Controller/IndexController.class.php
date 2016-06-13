@@ -69,11 +69,11 @@ class IndexController extends Controller {
         if ($task["TaskStatusEnum"] == 1) {
             $request = json_encode(array(
             'Id'=>I('get.taskId'),
-            "TCPCommandEnum"=>"7"));
+            "TCPCommandEnum"=>"6"));
         } else if ($task["TaskStatusEnum"] == 0 || $task["TaskStatusEnum"] == 2 || $task["TaskStatusEnum"] == 3) {
             $request = json_encode(array(
             'Id'=>I('get.taskId'),
-            "TCPCommandEnum"=>"8"));
+            "TCPCommandEnum"=>"7"));
         }
         if ($request) {
             socket_write($socket, $request, strlen($request));
