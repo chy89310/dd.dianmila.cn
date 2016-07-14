@@ -2,73 +2,117 @@
 /*
 define the nav bar
  */
+
 $navArray = array(
-	"Task"	=>	"任务",
-	"Proxy" =>	"代理",
-	"Account" => "用户");
+	"任务列表" => array(
+		"关键词任务" => "Task",
+		"公众号任务" => "Task"
+		),
+	"账户列表" => array(
+		"用户列表" => "Account",
+		"用户组" => "Account"
+		),
+	"代理列表" => "Proxy",
+	"操作历史" => "History"
+	);
  ?>
 <!DOCTYPE html>
 <html lang="">
 	<head>
  		<meta charset="utf-8">
- 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
- 		<meta name="viewport" content="width=device-width, initial-scale=1">
- 		<title>[title]</title>
- 
- 		<!-- Bootstrap CSS -->
- 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
- 
- 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
- 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
- 		<!--[if lt IE 9]>
- 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
- 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
- 		<![endif]-->
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta name="description" content="">
+	    <meta name="author" content="">
+
+	    <title>[title]</title>
+
+	    <!-- Bootstrap Core CSS -->
+	    <link href="Public/css/bootstrap.min.css" rel="stylesheet">
+
+	    <!-- MetisMenu CSS -->
+	    <link href="Public/css/metisMenu.min.css" rel="stylesheet">
+
+	    <!-- DataTables CSS -->
+	    <link href="Public/css/dataTables.bootstrap.css" rel="stylesheet">
+
+	    <!-- DataTables Responsive CSS -->
+	    <link href="Public/css/dataTables.responsive.css" rel="stylesheet">
+
+	    <!-- Custom CSS -->
+	    <link href="Public/css/sb-admin-2.css" rel="stylesheet">
+
+	    <!-- Custom Fonts -->
+	    <link href="Public/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+	    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	    <!--[if lt IE 9]>
+	        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	    <![endif]-->
  	</head>
 
  	<body>
-	<nav class="navbar navbar-default" role="navigation">
-		<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Dian Dian</a>
-			</div>
 
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse navbar-ex1-collapse">
-				<ul class="nav navbar-nav">
-					<?php 
-						foreach ($navArray as $key => $value) {
-							echo "<li ".(([title]==$value)?"class='active'":"")."><a href='__APP__/$key'>$value</a></li>";
+	<!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"> <b>点点 · 汇米信息</b> </a>
+            </div>
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="任务名">
+                                <span class="input-group-btn">
+	                                <button class="btn btn-default" type="button">
+	                                    <i class="fa fa-search"></i>
+	                                </button>
+                            	</span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="/"><i class="fa fa-dashboard fa-fw"></i> 首页</a>
+                        </li>
+<?php 
+                        foreach ($navArray as $key => $value) {
+                        	if (is_array($value)) {
+?>
+                        	<li>
+                        		<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>
+                        			<?php echo $key;?><span class="fa arrow"></span>
+                        		</a>
+                        		<ul class="nav nav-second-level">
+<?php 
+		                        foreach ($value as $sec_key => $sec_value) {
+?>
+                        			<li><a href="<?php echo $sec_value?>"> <?php echo $sec_key?></a></li>
+<?php
+								}
+?>
+                        		</ul>
+                        	</li>
+<?php
+                        	} else {
+?>
+                        	<li>
+                        		<a href="<?php echo $value?>"><i class="fa fa-table fa-fw"></i> <?php echo $key?></a>
+                        	</li>
+<?php
+                        	}
 						}
-					 ?>
-					<!-- // <li <?php if([title]=="test") echo "class='active'" ?> ><a href="/index.php">主页</a></li>
-					// <li <?php if([title]=="test") echo "class='active'" ?> ><a href="/index.php">主页</a></li> -->
-				</ul>
-				<form class="navbar-form navbar-left" role="search">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search">
-					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
-				</form>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Link</a></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li><a href="#">Separated link</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div><!-- /.navbar-collapse -->
-		</div>
-	</nav>
+?>
+                    </ul>
+                </div>
+            </div>
+        </nav>
