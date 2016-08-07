@@ -91,12 +91,15 @@ class IndexController extends Controller {
             $this->error("socket链接失败: ".socket_strerror(socket_last_error($socket))."\n");
         }
         $condition["_id"] = I('get.taskId');
-        $task = D('Task')->where($condition)->select();
+        $task_arr = D('Task')->where($condition)->select();
+        $task = $task_arr[I('get.taskId')];
         if ($task["TaskStatusEnum"] == 1) {
+            //已开始
             $request = json_encode(array(
             'Id'=>I('get.taskId'),
             "TCPCommandEnum"=>"6"));
         } else if ($task["TaskStatusEnum"] == 0 || $task["TaskStatusEnum"] == 2 || $task["TaskStatusEnum"] == 3) {
+            //未开始，已结束，暂停
             $request = json_encode(array(
             'Id'=>I('get.taskId'),
             "TCPCommandEnum"=>"7"));
