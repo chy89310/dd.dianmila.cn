@@ -16,7 +16,33 @@ class IndexController extends Controller {
         $this->display();
     }
 
+    public function testserver(){
+        $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+        if (!$socket) {
+            $this->error("socket创建失败: ".socket_strerror(socket_last_error())."\n");
+        }
+        $connect = socket_connect($socket, "127.0.0.1", "33333");
+        if (!$connect) {
+            $this->error("socket链接失败: ".socket_strerror(socket_last_error($socket))."\n");
+        }
+        $request = json_encode(array(
+        'Id'=>"000000000000000000000000",
+        "TCPCommandEnum"=>"9"));
+        if (socket_write($socket, $request, strlen($request))) {
+            if (socket_recv($socket, $buf, 2048, MSG_WAITALL)) {
+                socket_close($socket);
+            $message = iconv("gb2312","utf-8",$buf);
+            $this->success($message, '/Task/index', 3);
+            } else {
+                $this->error("socket读取失败\n");
+            }
+        } else {
+            $this->error("socket写入失败\n");
+        }
+    }
+
     public function create() {
+        $this->assign('title',"新增任务");
         $this->display();
     }
 
