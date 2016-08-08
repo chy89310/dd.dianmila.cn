@@ -81,6 +81,28 @@ class IndexController extends Controller {
         $this->success('新增成功', '/Task/index');
     }
 
+    public function edit($id) {
+        $task = D('Task')->find($id);
+        $this->assign('title',"编辑任务");
+        $this->assign('name',$task["Name"]);
+        $this->assign('page',$task["Pages"]);
+        $this->assign('id',$task["_id"]);
+        $this->display();
+    }
+
+    public function editTask() {
+        $data['Name'] = I('post.name');
+        $data['Pages'] = I('post.page');
+        $request['_id'] = I('post.id');
+        $result = D('Task')->where($request)->save($data);
+        if (!$result) {
+            //错误页面的默认跳转页面是返回前一页，通常不需要设置
+            $this->error('编辑失败');
+        }
+        //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
+        $this->success('编辑成功', '/Task/index');
+    }
+
     public function resumeOrPause() {
         $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
         if (!$socket) {
@@ -111,7 +133,7 @@ class IndexController extends Controller {
         }
     }
 
-    public function deleteTask() {
+    public function delete() {
         $task_condition['_id'] = I('get.taskId');
         $keyword_condition['TaskId'] = new \MongoId(I('get.taskId'));
         $KeywordModel = new \Keyword\Model\KeywordModel();

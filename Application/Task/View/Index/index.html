@@ -1,6 +1,5 @@
 <include file="./Application/Common/View/header.html" title="关键词任务"/>
 
-<a class="btn btn-default" href="/Task/index/create" role="button">新增任务</a>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
@@ -54,8 +53,8 @@
 										</td>
 										<td>
 											<a title="数据列表" type="button" class="btn btn-primary btn-circle task_button" href="/Claw/index/index?taskId={$item._id}"><i class="fa fa-list"></i></a>
-											<a title="关键词列表" type="button" class="btn btn-primary btn-circle task_button"><i class="fa fa-list"></i></a>
-											<a title="编辑" type="button" class="btn btn-success btn-circle task_button"><i class="fa fa-link"></i></a>
+											<a title="关键词列表" type="button" class="btn btn-primary btn-circle task_button" href="/Keyword/index/index?taskId={$item._id}"><i class="fa fa-list"></i></a>
+											<a title="编辑" type="button" class="btn btn-success btn-circle task_button" href="/Task/index/edit?id={$item._id}"><i class="fa fa-link"></i></a>
 											<?php if ($item['TaskStatusEnum'] == 0 || $item['TaskStatusEnum'] == 2): ?>
 												<a title="开始" type="button" class="btn btn-info btn-circle task_button" href="/Task/index/resumeOrPause?taskId={$item._id}"><i class="fa fa-power-off"></i></a>
 											<?php endif ?>
@@ -65,7 +64,7 @@
 											<?php if ($item['TaskStatusEnum'] == 3): ?>
 												<a title="继续" type="button" class="btn btn-info btn-circle task_button" href="/Task/index/resumeOrPause?taskId={$item._id}"><i class="fa fa-play"></i></a>
 											<?php endif ?>
-											<a title="删除" type="button" class="btn btn-danger btn-circle task_button" href="/Task/index/deleteTask?taskId={$item._id}"><i class="fa fa-times"></i> </a>
+											<a title="删除" type="button" class="btn btn-danger btn-circle task_button" href="/Task/index/delete?taskId={$item._id}"><i class="fa fa-times"></i> </a>
 										</td>
 
 									</tr>
