@@ -1,7 +1,7 @@
 <?php
 namespace GZH\Controller;
 use Think\Controller;
-class SearchController extends Controller {
+class CreateController extends Controller {
     public function index($keyword=""){
     	if ($keyword) {
     		$url = "http://weixin.sogou.com/weixin?type=1&query=".urlencode($keyword);
@@ -34,8 +34,20 @@ class SearchController extends Controller {
 	        } else {
 	            $this->error("socket写入失败\n");
 	        }
+	        $this->assign('title',"搜寻结果：".$keyword);
+        	$this->display();
+    	} else {
+    		$this->redirect('/GZH/Search/index');
     	}
-    	$this->assign('title',"搜寻公众号");
-        $this->display();
+    }
+    public function save($name, $url, $desc) {
+    	$gzh = array(
+    		'Name'=>$name,
+    		'Url'=>$url,
+    		'Description'=>$desc,
+    		'LastUpdate'=>0,
+    		'CreateTime'=>time(),
+    		'UpdateTime'=>time());
+    	D('GZH')->add($gzh);
     }
 }
